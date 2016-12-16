@@ -42,16 +42,6 @@ def isDone(grid):
 	
 	return True
 
-#Search the grid for the given values
-def getRel(grid, values):
-	rel = 0
-	for y in range(9):
-		for x in range(9):
-			if grid[y][x] in values:
-				rel += 1
-	
-	return rel
-
 #Try to fill out the grid based on sudoku rules
 #If the grid cannot be solved then simply select the box with the fewest options
 #and make a temporary grid with one of them and send it to this function again
@@ -74,7 +64,7 @@ def recurse(grid):
 				if tLen == 0:
 					return False
 				
-				if lessOps == [] or tLen < lessLen or (tLen == lessLen and getRel(grid, totalOps) < getRel(grid, lessOps)):
+				if lessOps == [] or tLen < lessLen or tLen == lessLen:
 					lessOps = totalOps
 					lessPos = (x, y)
 					lessLen = tLen
