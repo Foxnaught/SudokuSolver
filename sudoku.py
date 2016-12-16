@@ -1,6 +1,10 @@
 import copy
 import time
 
+#For a given 2d sudoku grid and a position
+#Find the 3x3 box that the position falls into
+#and return the values that can possibly be placed there based on the box rule
+#The box rule means that in none of the 9 3x3 boxes can there be more than one value 1-9
 def getBoxOptions(grid, pos):
 	ops = list(range(1, 10))
 	
@@ -13,7 +17,10 @@ def getBoxOptions(grid, pos):
 			ops = [i for i in ops if i != grid[yBox+y][xBox+x]]
 	
 	return ops
-	
+
+#For a given grid and position
+#return the possible values that can be placed at the position
+#based on row rules (no more than 1 value 1-9 in a given row or column)
 def getRowOptions(grid, pos):
 	ops = list(range(1, 10))
 	
@@ -25,15 +32,17 @@ def getRowOptions(grid, pos):
 
 	return ops
 
+#Check if there are any remaining 0's on the board
+#If there are none then the grid is solved
 def isDone(grid):
 	for y in range(9):
 		for x in range(9):
-			if grid[y][x] not in list(range(1, 10)):
+			if grid[y][x] == 0:
 				return False
 	
 	return True
 
-
+#Search the grid for the given values
 def getRel(grid, values):
 	rel = 0
 	for y in range(9):
