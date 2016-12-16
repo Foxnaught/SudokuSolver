@@ -103,8 +103,11 @@ start = time.time()
 solved = recurse(grid)
 print("Runtime: " + str(time.time() - start))
 
-for line in solved:
-	print(line)
+if solved:
+	for line in solved:
+		print(line)
+else:
+	print("There is no valid solution")
 
 
 
