@@ -52,6 +52,11 @@ def getRel(grid, values):
 	
 	return rel
 
+#Try to fill out the grid based on sudoku rules
+#If the grid cannot be solved then simply select the box with the fewest options
+#and make a temporary grid with one of them and send it to this function again
+#If the function returns false then the current grid cannot be solved
+#If the function returns a grid then it is at least one solution to the given grid
 def recurse(grid):
 	lessPos = (0, 0)
 	lessOps = []
@@ -90,7 +95,6 @@ def recurse(grid):
 
 
 grid = []
-
 f = open("sudoku.txt", "r")
 line = f.readline()
 while(line != ""):
@@ -100,13 +104,11 @@ while(line != ""):
 			sLine[s] = list(range(1, 10))
 	
 	grid.append(sLine)
-	
 	line = f.readline()
 
 pGrid = []
 for i in range(9):
 	pGrid.append([list(range(1, 10))]*9)
-
 
 start = time.time()
 solved = recurse(grid)
